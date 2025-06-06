@@ -1,18 +1,44 @@
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const App = () => {
   const [state, setState] = useState(0);
 
   function substract() {
-    if (state > 0) {
-      setState((prev) => prev - 1);
+    if (state >= 0) {
+      setState((prev) => prev - 2);
     }
   }
-  const add = () => {
+  const addion = () => {
     if (state < 10) {
-      setState((prev) => prev + 1);
+      setState((prev) => prev + 2);
     }
   };
+
+  const sub = () => {
+    if (state > 0) setState((prev) => prev - 1);
+  };
+
+  const add = () => {
+    setState((prev) => prev + 1);
+  };
+
+  const reset = () => {
+    setState(0);
+    localStorage.clear();
+    toast.info("reseted successfully");
+  };
+  const save = () => {
+    localStorage.setItem("counterValue", state);
+    toast.success("saved successfully");
+  };
+  useEffect(() => {
+    const counterValue = localStorage.getItem("counterValue");
+    const parsedValue = parseInt(counterValue);
+    if (parsedValue) {
+      setState(parsedValue);
+    }
+  }, []);
   return (
     <main className="container" style={{ marginTop: 80 }}>
       <header style={{ textAlign: "center" }}>
@@ -31,8 +57,20 @@ const App = () => {
         </div>
 
         <div className="grid">
-          <button onClick={substract}>-</button>
-          <button onClick={add}>+</button>
+          <button onClick={substract}>sub -2</button>
+          <button onClick={addion}>add +2</button>
+        </div>
+        <div className="grid">
+          <button onClick={sub}>sub -1</button>
+          <button onClick={add}>add +1</button>
+        </div>
+        <div>
+          <button className="outline" onClick={reset}>
+            Reset
+          </button>
+          <button className="contract" onClick={save}>
+            save
+          </button>
         </div>
       </section>
     </main>
