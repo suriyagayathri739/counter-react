@@ -1,13 +1,17 @@
-import react,{useState} from"react";
+import react, { useState } from "react";
 
 const App = () => {
-  const [state,setState]=useState(0);
+  const [state, setState] = useState(0);
   console.log(state);
-  function substract(){
-    setState(state-1);
+  function substract() {
+    if (state > 0) {
+      setState(state - 1);
+    }
   }
-  const add=()=>{
-    setState(state+1);
+  const add = () => {
+    if (state < 10) {
+      setState(state + 1);
+    }
   };
   return (
     <main className="container" style={{ marginTop: 80 }}>
