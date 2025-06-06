@@ -2,15 +2,15 @@ import react, { useState } from "react";
 
 const App = () => {
   const [state, setState] = useState(0);
-  console.log(state);
+
   function substract() {
     if (state > 0) {
-      setState(state - 1);
+      setState((prev) => prev - 1);
     }
   }
   const add = () => {
     if (state < 10) {
-      setState(state + 1);
+      setState((prev) => prev + 1);
     }
   };
   return (
